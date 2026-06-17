@@ -1,36 +1,16 @@
-from flask import Flask, render_template, request
-import pandas as pd
-import pickle
+import streamlit as st
 
-app = Flask(__name__)
+st.title("Earthquake Prediction System")
 
-# Load trained model
-with open("earthquake_model.pkl", "rb") as file:
-    model = pickle.load(file)
+magnitude = st.number_input("Magnitude")
+depth = st.number_input("Depth")
+latitude = st.number_input("Latitude")
+longitude = st.number_input("Longitude")
 
-@app.route("/")
-def home():
-    return render_template("index.html")
-
-@app.route("/predict", methods=["POST"])
-def predict():
-    magnitude = float(request.form["magnitude"])
-    depth = float(request.form["depth"])
-    latitude = float(request.form["latitude"])
-    longitude = float(request.form["longitude"])
-
-    sample = [[magnitude, depth, latitude, longitude]]
-
-    prediction = model.predict(sample)
-
-    if prediction[0] == 0:
-        result = "Low Earthquake"
-    elif prediction[0] == 1:
-        result = "Moderate Earthquake"
+if st.button("Predict"):
+    if magnitude < 4:
+        st.success("Low Earthquake")
+    elif magnitude < 6:
+        st.warning("Moderate Earthquake")
     else:
-        result = "Severe Earthquake"
-
-    return render_template("index.html", prediction_text=result)
-
-if __name__ == "__main__":
-    app.run(debug=True)
+        st.error("Severe Earthquake")
