@@ -1,4 +1,3 @@
-
 import streamlit as st
 
 # Page Configuration
@@ -8,7 +7,7 @@ st.set_page_config(
     layout="centered"
 )
 
-# Custom CSS
+# Background Style
 st.markdown("""
 <style>
 .stApp {
@@ -32,6 +31,9 @@ users = {
 if "logged_in" not in st.session_state:
     st.session_state.logged_in = False
 
+if "username" not in st.session_state:
+    st.session_state.username = ""
+
 # Login Page
 if not st.session_state.logged_in:
 
@@ -45,6 +47,7 @@ if not st.session_state.logged_in:
     if st.button("🚀 Login"):
         if username in users and users[username] == password:
             st.session_state.logged_in = True
+            st.session_state.username = username
             st.success("✅ Login Successful!")
             st.balloons()
             st.rerun()
@@ -53,9 +56,10 @@ if not st.session_state.logged_in:
 
 # Main Application
 else:
+
     st.markdown("<h1>🌎 Earthquake Prediction System 🌎</h1>", unsafe_allow_html=True)
 
-    st.success(f"🎉 Welcome, {username}!")
+    st.success(f"🎉 Welcome, {st.session_state.username}!")
 
     st.markdown("### 📊 Enter Earthquake Details")
 
@@ -85,6 +89,7 @@ else:
 
     if st.button("🚪 Logout"):
         st.session_state.logged_in = False
+        st.session_state.username = ""
         st.rerun()
 
     st.markdown("---")
@@ -92,3 +97,4 @@ else:
         "<center><h4>💙 Developed for Earthquake Analysis & Prediction 🌍</h4></center>",
         unsafe_allow_html=True
     )
+
