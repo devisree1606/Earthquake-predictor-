@@ -45,6 +45,8 @@ The Earthquake Prediction System is a machine learning-based web application dev
 5. Result Display
 
 ## Conclusion
+<img width="1366" height="768" alt="Screenshot (43)" src="https://github.com/user-attachments/assets/d4304594-4af9-4c8c-9748-ff56c4c1dbcd" />
+
 
 ##screenshot
 <img width="1366" height="768" alt="Screenshot (41)" src="https://github.com/user-attachments/assets/ef0ef418-7512-4e6c-8bf3-5182930b7d8b" />
